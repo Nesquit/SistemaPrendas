@@ -1,0 +1,132 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/indexAdmin.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="top">
+        <h1>Proveedor</h1>
+    </ui:define>
+
+    <ui:define name="content">
+        #{proveedorBean.listar()}
+        <h:form id="frm1">
+            <p:panelGrid id="form" columns="2">
+
+                <p:outputLabel for="txtNombre" value="Nombre Empresa" />
+                <p:inputText id="txtNombre" value="#{proveedorBean.proveedor.nombreEmpresa}" />
+
+                <p:outputLabel for="con" value="Nombre Contacto" />
+                <p:inputText id="con" value="#{proveedorBean.proveedor.nombreContacto}" />
+
+                <p:outputLabel for="apell" value="Apellido Contacto" />
+                <p:inputText id="apell" value="#{proveedorBean.proveedor.apellidoContacto}" />
+
+                <p:outputLabel for="dire" value="Direccio" />
+                <p:inputText id="dire" value="#{proveedorBean.proveedor.direccion}" />
+
+                <p:outputLabel for="tel" value="Telefono" />
+                <p:inputText id="tel" value="#{proveedorBean.proveedor.telefono}" />
+
+                <p:outputLabel for="corr" value="Correo" />
+                <p:inputText id="corr" value="#{proveedorBean.proveedor.correo}" />
+
+
+                <p:outputLabel for="est" value="Estatus" />
+                <p:selectOneMenu id="est" value="#{proveedorBean.proveedor.estatus}" >
+                    <f:selectItem itemLabel="Activo" itemValue="1" />                
+                    <f:selectItem itemLabel="Inactivo" itemValue="0" />                
+                </p:selectOneMenu>
+                <p:commandButton value="Registrar" actionListener="#{proveedorBean.boton()}" update="datos,form" />
+                <p:commandButton value="Listar" actionListener="#{proveedorBean.listar()}" update="datos" />                
+            </p:panelGrid>
+            <p:dataTable id="datos" value="#{proveedorBean.listaProveedores}" var="proveedor" >
+                <p:column headerText="ID" >
+                    <p:outputLabel value="#{proveedor.idProveedor}" />                    
+                </p:column>       
+
+                <p:column headerText="Nombre Empresa" >
+                    <p:outputLabel value="#{proveedor.nombreEmpresa}" />                    
+                </p:column> 
+
+                <p:column headerText="Nombre Contacto" >
+                    <p:outputLabel value="#{proveedor.nombreContacto}" />                    
+                </p:column> 
+
+                <p:column headerText="Apellido Contacto" >
+                    <p:outputLabel value="#{proveedor.apellidoContacto}" />                    
+                </p:column>
+                <p:column headerText="Direccion" >
+                    <p:outputLabel value="#{proveedor.direccion}" />                    
+                </p:column>
+                <p:column headerText="Correo" >
+                    <p:outputLabel value="#{proveedor.correo}" />                    
+                </p:column>
+                <p:column headerText="Telefono" >
+                    <p:outputLabel value="#{proveedor.telefono}" />                    
+                </p:column> 
+                <p:column headerText="Estatus" width="40" >
+                    <p:graphicImage id="imag" url="#{proveedor.estatusImg}" width="20" height="20" />
+                </p:column> 
+
+                <p:column headerText="Modificar" >
+                    <p:commandLink value="Modificar" actionListener="#{proveedorBean.leerID(proveedor)}" 
+                                   oncomplete="PF('dlgDatos').show()" update=":idDlg" />                    
+                </p:column>
+
+
+                <p:column headerText="Eliminar" >
+                    <p:commandLink value="Eliminar" actionListener="#{proveedorBean.eliminar(proveedor)}" update="datos" />             
+                </p:column> 
+            </p:dataTable>
+        </h:form>
+
+
+
+        <p:dialog header="Datos" widgetVar="dlgDatos" id="idDlg">
+            <h:form>
+                <p:panelGrid id="form" columns="2">
+                    <p:outputLabel for="id" value="ID Proveedor" />
+                    <p:outputLabel id="id" value="#{proveedorBean.proveedor.idProveedor}" />
+
+                    <p:outputLabel for="txtNombre" value="Nombre Empresa" />
+                    <p:inputText id="txtNombre" value="#{proveedorBean.proveedor.nombreEmpresa}" />
+
+                    <p:outputLabel for="con" value="Nombre Contacto" />
+                    <p:inputText id="con" value="#{proveedorBean.proveedor.nombreContacto}" />
+
+                    <p:outputLabel for="apell" value="Apellido Contacto" />
+                    <p:inputText id="apell" value="#{proveedorBean.proveedor.apellidoContacto}" />
+
+                    <p:outputLabel for="dire" value="Direccio" />
+                    <p:inputText id="dire" value="#{proveedorBean.proveedor.direccion}" />
+
+                    <p:outputLabel for="tel" value="Telefono" />
+                    <p:inputText id="tel" value="#{proveedorBean.proveedor.telefono}" />
+
+                    <p:outputLabel for="corr" value="Correo" />
+                    <p:inputText id="corr" value="#{proveedorBean.proveedor.correo}" />
+
+
+                    <p:outputLabel for="est" value="Estatus" />
+                    <p:selectOneMenu id="est" value="#{proveedorBean.proveedor.estatus}" >
+                        <f:selectItem itemLabel="Activo" itemValue="1" />                
+                        <f:selectItem itemLabel="Inactivo" itemValue="0" />                
+                    </p:selectOneMenu>
+
+                    <p:commandButton value="Modificar" actionListener="#{proveedorBean.modificar()}"
+                                     oncomplete="PF('dlgDatos').hide()" update=":frm1:datos" />              
+                </p:panelGrid>
+
+            </h:form>
+
+        </p:dialog>
+    </ui:define>
+
+    <ui:define name="bottom">
+
+    </ui:define>
+
+</ui:composition>
