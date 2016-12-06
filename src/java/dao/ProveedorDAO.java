@@ -39,7 +39,7 @@ public class ProveedorDAO extends DAO{
             st.setString(4, prov.getDireccion());
             st.setString(5, prov.getTelefono());
             st.setString(6, prov.getCorreo());
-            st.setInt(7, prov.getEstatus());
+            st.setInt(7, 1);
             st.executeUpdate();
             System.out.println(st.getUpdateCount());
         } catch (Exception e) {
