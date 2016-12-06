@@ -8,13 +8,14 @@
 
     <body>
 
-        <ui:composition template="./main.xhtml">
-
+        <ui:composition template="./indexClient.xhtml">
+            
             <ui:define name="content">
                 <div align="center">
                     <h:form id="registerClient">
+                        #{clienteBean.datosCliente(sessionScope.usuario)}
                         <p:growl id="growl" showDetail="true" sticky="true" />
-                        <p:panel header="Registro de cliente" style="color: blue; font-size: large">
+                        <p:panel header="Perfil" style="color: blue; font-size: large">
                             <p:panelGrid columns="2" class="center_content">
                                 <p:outputLabel for="nombre" value="Nombre" />
                                 <p:inputText id="nombre" value="#{clienteBean.cliente.nombre}" required="true" />
@@ -28,14 +29,8 @@
                                 <p:outputLabel for="telefono" value="Teléfono" />
                                 <p:inputText id="telefono" value="#{clienteBean.cliente.telefono}" required="true" />
                                 
-                                <p:outputLabel for="correo" value="Correo" />
-                                <p:inputText id="correo" value="#{clienteBean.usuario.correo}" required="true" />
-                                
-                                <p:outputLabel for="contraseña" value="Contraseña" />
-                                <p:password id="contraseña" value="#{clienteBean.usuario.contraseña}" required="true" />
-                                
                                 <f:facet name="footer">
-                                    <p:commandButton style="background-color: blue; color: white" value="Registrar" action="#{clienteBean.registrarCliente()}" update="growl" />
+                                    <p:commandButton style="background-color: blue; color: white" value="Actualizar" action="#{clienteBean.actualizarPerfil(sessionScope.usuario)}" update="growl" />
                                 </f:facet> 
                             </p:panelGrid>
                         </p:panel>

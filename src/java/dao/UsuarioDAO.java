@@ -87,9 +87,10 @@ public class UsuarioDAO extends DAO{
             st.setString(1, usuario.getCorreo());
             st.setString(2, usuario.getContraseña());
             st.executeUpdate();
-            rs = st.getGeneratedKeys();
-            while(rs.next()) {
-                idUsuario = rs.getInt(1);
+            st = this.getCon().prepareStatement("SELECT id FROM Usuarios ORDER BY id DESC");
+            rs = st.executeQuery();
+            if(rs.first()) {
+                idUsuario = rs.getInt("id");
             }
         } catch (Exception e) {
             throw e;

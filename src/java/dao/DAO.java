@@ -28,7 +28,7 @@ public class DAO {
     public void conectar(){
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            con=DriverManager.getConnection("jdbc:mysql://localhost:3306/sistemaprendas?user=root&password=");
+            con=DriverManager.getConnection("jdbc:mysql://localhost:3306/sistemaprendas?user=root&password=root");
         }catch (ClassNotFoundException | SQLException e){
             System.out.println("Error al conectar a la BD: " + e);
         }

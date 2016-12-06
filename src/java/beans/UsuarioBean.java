@@ -25,8 +25,6 @@ import modelos.Usuario;
 public class UsuarioBean {
 
     private Usuario usuario = new Usuario();
-    FacesContext context = null;
-    String titulo, mensaje;
     
     /**
      * Creates a new instance of UsuarioBean
@@ -44,14 +42,12 @@ public class UsuarioBean {
     
     public String iniciarSesion() throws SQLException, Exception {
         UsuarioDAO dao = new UsuarioDAO();
-        context = FacesContext.getCurrentInstance();
-        boolean userExist = dao.verificarUsuario(usuario);
-        if(userExist) {
-            boolean loginSuccess = dao.inciarSesion(usuario);
-            if(loginSuccess) {
-                boolean isAdmin = dao.tipoUsuario(usuario);
+        if(dao.verificarUsuario(usuario)) {
+            if(dao.inciarSesion(usuario)) {
                 variablesSesion();
-                if(isAdmin) return "indexAdmin";
+                if(dao.tipoUsuario(usuario)) {
+                    return "indexAdmin";
+                }
                 else return "indexClient";
             } else {
                 Mensajes.generarMensaje("Error al iniciar sesión", "No empatan las credenciales");
@@ -62,8 +58,14 @@ public class UsuarioBean {
         return "login";
     }
     
+    public String cerrarSesion() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.getExternalContext().getSessionMap().remove("usuario");
+        return "login";
+    }
+    
     public void variablesSesion() {
-        context = FacesContext.getCurrentInstance();
+        FacesContext context = FacesContext.getCurrentInstance();
         context.getExternalContext().getSessionMap().put("usuario", usuario.getCorreo());
     }
     

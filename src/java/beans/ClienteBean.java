@@ -7,7 +7,6 @@ package beans;
 
 import dao.ClienteDAO;
 import dao.UsuarioDAO;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
@@ -54,13 +53,36 @@ public class ClienteBean {
     public String registrarCliente() throws Exception {
         ClienteDAO daoCliente = new ClienteDAO();
         UsuarioDAO daoUsuario = new UsuarioDAO();
-        int idUsuario = daoUsuario.registrarUsuario(usuario);
-        if(idUsuario != 0) {
-            Mensajes.generarMensaje("bien", "se generó " + idUsuario);
-        } else {
-            Mensajes.generarMensaje("Error al registrar", "Hubo un problema con generar la nueva cuenta. Vuelva a intentarlo.");
-        }
+        if(!daoUsuario.verificarUsuario(usuario)) {
+            int idUsuario = daoUsuario.registrarUsuario(usuario);
+            daoCliente.registrarCliente(cliente, idUsuario);
+            if(daoUsuario.inciarSesion(usuario)) {
+                variablesSesion();
+                return "indexClient";
+            }
+        } else 
+            Mensajes.generarMensaje("Error", "El usuario ya existe. Pruebe otro.");
         return "registerClient";
+    }
+    
+    public void datosCliente(String user) throws Exception {
+        ClienteDAO dao = new ClienteDAO();
+        Cliente tmp;
+        tmp = dao.buscarCliente(user);
+        if(tmp!=null) {
+            this.cliente = tmp;
+        }
+    }
+    
+    public void actualizarPerfil(String user) throws Exception {
+        ClienteDAO dao = new ClienteDAO();
+        dao.actualizarCliente(cliente, user);
+        Mensajes.generarMensaje("Éxito", "La información ha sido actualizada.");
+    }
+    
+    public void variablesSesion() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.getExternalContext().getSessionMap().put("usuario", usuario.getCorreo());
     }
     
 }
