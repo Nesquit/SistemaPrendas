@@ -5,10 +5,23 @@
  */
 package dao;
 
+import java.sql.PreparedStatement;
+
 /**
  *
  * @author nesquit
  */
-public class ClienteDAO {
+public class ClienteDAO extends DAO{
+    
+    public void registrarCliente() throws Exception {
+        try {
+            this.conectar();
+            PreparedStatement st = this.getCon().prepareStatement("INSERT INTO Clientes ");
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            
+        }
+    }
     
 }

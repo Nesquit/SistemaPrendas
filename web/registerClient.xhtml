@@ -1,14 +1,46 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
         <ui:composition template="./main.xhtml">
 
             <ui:define name="content">
-                content
+                <div align="center">
+                    <h:form id="registerClient">
+                        <p:growl id="growl" showDetail="true" sticky="true" />
+                        <p:panel header="Registro de cliente" style="color: blue; font-size: large">
+                            <p:panelGrid columns="2" class="center_content">
+                                <p:outputLabel for="nombre" value="Nombre" />
+                                <p:inputText id="nombre" value="#{clienteBean.cliente.nombre}" required="true" />
+                                
+                                <p:outputLabel for="apellido" value="Apellido" />
+                                <p:inputText id="apellido" value="#{clienteBean.cliente.apellido}" required="true" />
+                                
+                                <p:outputLabel for="direccion" value="Dirección" />
+                                <p:inputText id="direccion" value="#{clienteBean.cliente.direccion}" required="true" />
+                                
+                                <p:outputLabel for="telefono" value="Teléfono" />
+                                <p:inputText id="telefono" value="#{clienteBean.cliente.telefono}" required="true" />
+                                
+                                <p:outputLabel for="correo" value="Correo" />
+                                <p:inputText type="email" id="correo" value="#{clienteBean.usuario.correo}" required="true" />
+                                
+                                <p:outputLabel for="contraseña" value="Contraseña" />
+                                <p:password id="contraseña" value="#{clienteBean.usuario.contraseña}" required="true" />
+                                
+                                <f:facet name="footer">
+                                    <p:commandButton style="background-color: blue; color: white" value="Registrar" action="#{clienteBean.registrarCliente()}" update="growl" />
+                                </f:facet> 
+                            </p:panelGrid>
+                        </p:panel>
+                    </h:form>
+                </div>
             </ui:define>
 
         </ui:composition>

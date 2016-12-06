@@ -9,6 +9,7 @@ import dao.UsuarioDAO;
 import java.sql.SQLException;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import modelos.Usuario;
@@ -19,6 +20,7 @@ import modelos.Usuario;
  */
 @ManagedBean
 @ViewScoped
+@SessionScoped
 
 public class UsuarioBean {
 
@@ -47,18 +49,22 @@ public class UsuarioBean {
         if(userExist) {
             boolean loginSuccess = dao.inciarSesion(usuario);
             if(loginSuccess) {
-                titulo = "Éxito";
-                mensaje = "Bienvenido";
+                boolean isAdmin = dao.tipoUsuario(usuario);
+                variablesSesion();
+                if(isAdmin) return "indexAdmin";
+                else return "indexClient";
             } else {
-                titulo = "Error al iniciar sesión";
-                mensaje = "No empatan las credenciales";
+                Mensajes.generarMensaje("Error al iniciar sesión", "No empatan las credenciales");
             }
         } else {
-            titulo = "Error";
-            mensaje = "El usuario no existe";
+            Mensajes.generarMensaje("Error", "El usuario no existe");
         }
-        context.addMessage(null, new FacesMessage(titulo, mensaje));
         return "login";
+    }
+    
+    public void variablesSesion() {
+        context = FacesContext.getCurrentInstance();
+        context.getExternalContext().getSessionMap().put("usuario", usuario.getCorreo());
     }
     
 }

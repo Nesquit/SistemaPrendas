@@ -11,10 +11,10 @@
         <ui:composition template="./main.xhtml">
 
             <ui:define name="content">
-                <div>
+                <div align="center">
                     <h:form id="login">
                         <p:growl id="growl" showDetail="true" sticky="true" />
-                        <p:panel>
+                        <p:panel header="Inicio de sesión" style="color: blue; font-size: large">
                             <p:panelGrid columns="2" class="center_content">
                                 <p:outputLabel for="usuario" value="Usuario" />
                                 <p:inputText id="usuario" value="#{usuarioBean.usuario.correo}" required="true" />
@@ -23,7 +23,7 @@
                                 <p:password id="contraseña" value="#{usuarioBean.usuario.contraseña}" required="true" />
 
                                 <f:facet name="footer">
-                                    <p:commandButton value="Entrar" action="#{usuarioBean.iniciarSesion()}" update="growl" />
+                                    <p:commandButton style="background-color: blue; color: white" value="Entrar" action="#{usuarioBean.iniciarSesion()}" update="growl" />
                                 </f:facet>  
                             </p:panelGrid>
                         </p:panel>
