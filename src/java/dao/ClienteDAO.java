@@ -18,7 +18,7 @@ public class ClienteDAO extends DAO{
     public void registrarCliente(Cliente cliente, int idUsuario) throws Exception {
         try {
             this.conectar();
-            PreparedStatement st = this.getCon().prepareStatement("INSERT INTO Clientes VALUES(0, ?, ?, ?, ?, ?, 1)");
+            PreparedStatement st = this.getCon().prepareStatement("INSERT INTO clientes VALUES(0, ?, ?, ?, ?, ?, 1)");
             st.setInt(1, idUsuario);
             st.setString(2, cliente.getNombre());
             st.setString(3, cliente.getApellido());
@@ -37,7 +37,7 @@ public class ClienteDAO extends DAO{
         ResultSet rs;
         try {
             this.conectar();
-            PreparedStatement st = this.getCon().prepareStatement("SELECT * FROM Clientes WHERE idUsuario = (SELECT id FROM Usuarios WHERE correo = ?)");
+            PreparedStatement st = this.getCon().prepareStatement("SELECT * FROM clientes WHERE idUsuario = (SELECT id FROM usuarios WHERE correo = ?)");
             st.setString(1, usuario);
             rs = st.executeQuery();
             if(rs.next()) {
@@ -58,12 +58,12 @@ public class ClienteDAO extends DAO{
     public void actualizarCliente(Cliente cliente, String usuario) throws Exception {
         try {
             this.conectar();
-            PreparedStatement st = this.getCon().prepareStatement("UPDATE Clientes SET "
+            PreparedStatement st = this.getCon().prepareStatement("UPDATE clientes SET "
                     + "nombre = ?, "
                     + "apellido = ?, "
                     + "direccion = ?,"
                     + "telefono = ? "
-                    + "WHERE idUsuario = (SELECT id FROM Usuarios WHERE correo = ?)");
+                    + "WHERE idUsuario = (SELECT id FROM usuarios WHERE correo = ?)");
             st.setString(1, cliente.getNombre());
             st.setString(2, cliente.getApellido());
             st.setString(3, cliente.getDireccion());

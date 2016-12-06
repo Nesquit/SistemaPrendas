@@ -22,7 +22,7 @@ public class UsuarioDAO extends DAO{
         ResultSet rs;
         try {
             this.conectar();
-            PreparedStatement st = this.getCon().prepareStatement("SELECT * FROM Usuarios WHERE correo = ?");
+            PreparedStatement st = this.getCon().prepareStatement("SELECT * FROM usuarios WHERE correo = ?");
             st.setString(1, usuario.getCorreo());
             rs = st.executeQuery();
             bandera = false;
@@ -41,7 +41,7 @@ public class UsuarioDAO extends DAO{
         ResultSet rs;
         try {
             this.conectar();
-            PreparedStatement st = this.getCon().prepareStatement("SELECT * FROM Usuarios WHERE correo = ? AND contraseña = ?");
+            PreparedStatement st = this.getCon().prepareStatement("SELECT * FROM usuarios WHERE correo = ? AND contraseña = ?");
             st.setString(1, usuario.getCorreo());
             st.setString(2, usuario.getContraseña());
             rs = st.executeQuery();
@@ -61,7 +61,7 @@ public class UsuarioDAO extends DAO{
         ResultSet rs;
         try {
             this.conectar();
-            PreparedStatement st = this.getCon().prepareStatement("SELECT tipo FROM Usuarios WHERE correo = ?");
+            PreparedStatement st = this.getCon().prepareStatement("SELECT tipo FROM usuarios WHERE correo = ?");
             st.setString(1, usuario.getCorreo());
             rs = st.executeQuery();
             bandera = false;
@@ -83,11 +83,11 @@ public class UsuarioDAO extends DAO{
         int idUsuario = 0;
         try {
             this.conectar();
-            PreparedStatement st = this.getCon().prepareStatement("INSERT INTO Usuarios VALUES(0, ?, ?, 0)");
+            PreparedStatement st = this.getCon().prepareStatement("INSERT INTO usuarios VALUES(0, ?, ?, 0)");
             st.setString(1, usuario.getCorreo());
             st.setString(2, usuario.getContraseña());
             st.executeUpdate();
-            st = this.getCon().prepareStatement("SELECT id FROM Usuarios ORDER BY id DESC");
+            st = this.getCon().prepareStatement("SELECT id FROM usuarios ORDER BY id DESC");
             rs = st.executeQuery();
             if(rs.first()) {
                 idUsuario = rs.getInt("id");
