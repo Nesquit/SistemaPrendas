@@ -14,15 +14,22 @@
     <h:body>
 
         <div id="top">
-            <ui:insert name="top">Top</ui:insert>
+            <ui:insert name="top"><h1>Inicio</h1></ui:insert>
+            
+            <ul>
+                    <li><h:link outcome="indexAdmin" value="Index Admin" /></li>
+                    <li><h:link outcome="proveedorABC" value="Proveedor" /></li>
+                    <li><h:link outcome="resultado" value="Resultados" /></li>
+                </ul>
         </div>
 
+        
         <div id="content" class="center_content">
-            <ui:insert name="content">Content</ui:insert>
+            <ui:insert name="content">Administrador de sistema</ui:insert>
         </div>
 
         <div id="bottom">
-            <ui:insert name="bottom">Bottom</ui:insert>
+            <ui:insert name="bottom"></ui:insert>
         </div>
 
     </h:body>
