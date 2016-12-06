@@ -11,22 +11,24 @@
         <ui:composition template="./main.xhtml">
 
             <ui:define name="content">
-                <h:form id="login">
-                    <p:growl id="growl" showDetail="true" sticky="true" />
-                    <p:panel>
-                        <p:panelGrid columns="2" class="center_content">
-                            <p:outputLabel for="usuario" value="Usuario" />
-                            <p:inputText id="usuario" value="#{usuarioBean.usuario.correo}" required="true" />
-                            
-                            <p:outputLabel for="contraseña" value="Contraseña" />
-                            <p:password id="contraseña" value="#{usuarioBean.usuario.contraseña}" required="true" />
-                            
-                            <f:facet name="footer">
-                                <p:commandButton value="Entrar" action="#{usuarioBean.iniciarSesion()}" update="growl" />
-                            </f:facet>  
-                        </p:panelGrid>
-                    </p:panel>
-                </h:form>
+                <div>
+                    <h:form id="login">
+                        <p:growl id="growl" showDetail="true" sticky="true" />
+                        <p:panel>
+                            <p:panelGrid columns="2" class="center_content">
+                                <p:outputLabel for="usuario" value="Usuario" />
+                                <p:inputText id="usuario" value="#{usuarioBean.usuario.correo}" required="true" />
+
+                                <p:outputLabel for="contraseña" value="Contraseña" />
+                                <p:password id="contraseña" value="#{usuarioBean.usuario.contraseña}" required="true" />
+
+                                <f:facet name="footer">
+                                    <p:commandButton value="Entrar" action="#{usuarioBean.iniciarSesion()}" update="growl" />
+                                </f:facet>  
+                            </p:panelGrid>
+                        </p:panel>
+                    </h:form> 
+                </div>
             </ui:define>
 
         </ui:composition>
