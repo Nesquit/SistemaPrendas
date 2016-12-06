@@ -34,11 +34,7 @@
                 <p:inputText id="corr" value="#{proveedorBean.proveedor.correo}" />
 
 
-                <p:outputLabel for="est" value="Estatus" />
-                <p:selectOneMenu id="est" value="#{proveedorBean.proveedor.estatus}" >
-                    <f:selectItem itemLabel="Activo" itemValue="1" />                
-                    <f:selectItem itemLabel="Inactivo" itemValue="0" />                
-                </p:selectOneMenu>
+              
                 <p:commandButton value="Registrar" actionListener="#{proveedorBean.boton()}" update="datos,form" />
                 <p:commandButton value="Listar" actionListener="#{proveedorBean.listar()}" update="datos" />                
             </p:panelGrid>
@@ -77,9 +73,6 @@
                 </p:column>
 
 
-                <p:column headerText="Eliminar" >
-                    <p:commandLink value="Eliminar" actionListener="#{proveedorBean.eliminar(proveedor)}" update="datos" />             
-                </p:column> 
             </p:dataTable>
         </h:form>
 
