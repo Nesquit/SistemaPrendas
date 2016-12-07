@@ -23,7 +23,7 @@
                                 <p:password id="contraseña" value="#{usuarioBean.usuario.contraseña}" required="true" />
 
                                 <f:facet name="footer">
-                                    <p:commandButton style="background-color: blue; color: white" value="Entrar" action="#{usuarioBean.iniciarSesion()}" update="growl" />
+                                    <p:commandButton style="background-color: blue; color: white" value="Entrar" action="#{usuarioBean.iniciarSesion()}" update="growl,login" />
                                 </f:facet>  
                             </p:panelGrid>
                         </p:panel>

@@ -13,13 +13,13 @@
             <ui:define name="content">
                 <div align="center">
                 #{proveedorBean.listar()}
-                    <h:form id="frm1">
-                        <p:growl id="growl" showDetail="true" sticky="true" />
-                        <p:panel header="Administración de proveedores">
+                    <p:panel header="Administración de proveedores">
+                        <h:form id="frm1">
+                            <p:growl id="growl" showDetail="true" sticky="true" />
                             <p:panelGrid id="form" columns="2">
 
                                 <p:outputLabel for="txtNombre" value="Nombre Empresa" />
-                                <p:inputText id="txtNombre" value="#{proveedorBean.proveedor.nombreEmpresa}" />
+                                <p:inputText id="txtNombre" value="#{proveedorBean.proveedor.nombreEmpresa}" required="true" />
 
                                 <p:outputLabel for="con" value="Nombre Contacto" />
                                 <p:inputText id="con" value="#{proveedorBean.proveedor.nombreContacto}" />
@@ -28,19 +28,21 @@
                                 <p:inputText id="apell" value="#{proveedorBean.proveedor.apellidoContacto}" />
 
                                 <p:outputLabel for="dire" value="Direccio" />
-                                <p:inputText id="dire" value="#{proveedorBean.proveedor.direccion}" />
+                                <p:inputText id="dire" value="#{proveedorBean.proveedor.direccion}" required="true" />
 
                                 <p:outputLabel for="tel" value="Telefono" />
-                                <p:inputText id="tel" value="#{proveedorBean.proveedor.telefono}" />
+                                <p:inputText id="tel" value="#{proveedorBean.proveedor.telefono}" required="true" />
 
                                 <p:outputLabel for="corr" value="Correo" />
-                                <p:inputText id="corr" value="#{proveedorBean.proveedor.correo}" />
+                                <p:inputText id="corr" value="#{proveedorBean.proveedor.correo}" required="true" />
                                     
                                 <f:facet name="footer">
-                                    <p:commandButton value="Registrar" actionListener="#{proveedorBean.boton()}" update="datos,form,growl" />
+                                    <p:commandButton value="Registrar" actionListener="#{proveedorBean.boton()}" update=":proveedorU:datos,form,growl" />
                                 </f:facet>
                             </p:panelGrid>
                             <br/>
+                        </h:form>
+                        <h:form id="proveedorU">
                             <p:dataTable id="datos" value="#{proveedorBean.listaProveedores}" var="proveedor" >
                                 <p:column headerText="ID" >
                                     <p:outputLabel value="#{proveedor.idProveedor}" />                    
@@ -75,8 +77,8 @@
                                                    oncomplete="PF('dlgDatos').show()" update=":idDlg" />                    
                                 </p:column>
                             </p:dataTable>
-                        </p:panel>
-                    </h:form>
+                        </h:form>
+                    </p:panel>
                     <p:dialog header="Datos" widgetVar="dlgDatos" id="idDlg">
                         <h:form>
                             <p:panel header="Actualizar proveedor">
@@ -109,7 +111,7 @@
                                     </p:selectOneMenu>
 
                                     <p:commandButton value="Modificar" actionListener="#{proveedorBean.modificar()}"
-                                                     oncomplete="PF('dlgDatos').hide()" update=":frm1:datos" />              
+                                                     oncomplete="PF('dlgDatos').hide()" update=":proveedorU:datos" />              
                                 </p:panelGrid>
                             </p:panel>
                         </h:form>

@@ -6,12 +6,17 @@
 package beans;
 
 import dao.ClienteDAO;
+import dao.PedidoDAO;
 import dao.UsuarioDAO;
+import java.util.ArrayList;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import modelos.Cliente;
+import modelos.MaterialesPrendaPedido;
+import modelos.Pedido;
 import modelos.Usuario;
 
 
@@ -25,6 +30,9 @@ import modelos.Usuario;
 
 public class ClienteBean {
 
+    private List<Pedido> listaPedidos = new ArrayList();
+    private List<MaterialesPrendaPedido> listaDetallePedido = new ArrayList();
+    
     private Cliente cliente = new Cliente();
     private Usuario usuario = new Usuario();
     
@@ -82,6 +90,32 @@ public class ClienteBean {
     public void variablesSesion() {
         FacesContext context = FacesContext.getCurrentInstance();
         context.getExternalContext().getSessionMap().put("usuario", usuario.getCorreo());
+    }
+
+    public List<Pedido> getListaPedidos() {
+        return listaPedidos;
+    }
+
+    public void setListaPedidos(List<Pedido> listaPedidos) {
+        this.listaPedidos = listaPedidos;
+    }
+
+    public List<MaterialesPrendaPedido> getListaDetallePedido() {
+        return listaDetallePedido;
+    }
+
+    public void setListaDetallePedido(List<MaterialesPrendaPedido> listaDetallePedido) {
+        this.listaDetallePedido = listaDetallePedido;
+    }
+    
+    public void consultarPedidos(String user) throws Exception {
+        PedidoDAO dao = new PedidoDAO();
+        listaPedidos = dao.consultarPedidos(user);
+    }
+    
+    public void verDetallePedido(Pedido pedido) throws Exception {
+        PedidoDAO dao = new PedidoDAO();
+        listaDetallePedido = dao.verDetallePedido(pedido);
     }
     
 }

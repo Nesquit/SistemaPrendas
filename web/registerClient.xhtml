@@ -28,14 +28,14 @@
                                 <p:outputLabel for="telefono" value="Teléfono" />
                                 <p:inputText id="telefono" value="#{clienteBean.cliente.telefono}" required="true" />
                                 
-                                <p:outputLabel for="correo" value="Correo" />
+                                <p:outputLabel for="correo" value="Usuario" />
                                 <p:inputText id="correo" value="#{clienteBean.usuario.correo}" required="true" />
                                 
                                 <p:outputLabel for="contraseña" value="Contraseña" />
                                 <p:password id="contraseña" value="#{clienteBean.usuario.contraseña}" required="true" />
                                 
                                 <f:facet name="footer">
-                                    <p:commandButton style="background-color: blue; color: white" value="Registrar" action="#{clienteBean.registrarCliente()}" update="growl" />
+                                    <p:commandButton style="background-color: blue; color: white" value="Registrar" action="#{clienteBean.registrarCliente()}" update="growl,registerClient" />
                                 </f:facet> 
                             </p:panelGrid>
                         </p:panel>

@@ -35,7 +35,7 @@ public class MaterialDAO extends DAO {
             st.setDouble(4, boton.getPrecioCompra());
             st.setDouble(5, boton.getPrecioVenta());
             st.setString(6, boton.getUnidadMedida());
-            st.setInt(7, boton.getStock());
+            st.setDouble(7, boton.getStock());
             st.executeUpdate();
             st = this.getCon().prepareStatement("SELECT id FROM materiales ORDER BY id DESC");
             rs = st.executeQuery();
@@ -167,7 +167,7 @@ public class MaterialDAO extends DAO {
             st.setDouble(4, cierre.getPrecioCompra());
             st.setDouble(5, cierre.getPrecioVenta());
             st.setString(6, cierre.getUnidadMedida());
-            st.setInt(7, cierre.getStock());
+            st.setDouble(7, cierre.getStock());
             st.executeUpdate();
             st = this.getCon().prepareStatement("SELECT id FROM materiales ORDER BY id DESC");
             rs = st.executeQuery();
@@ -303,7 +303,7 @@ public class MaterialDAO extends DAO {
             st.setDouble(4, elastico.getPrecioCompra());
             st.setDouble(5, elastico.getPrecioVenta());
             st.setString(6, elastico.getUnidadMedida());
-            st.setInt(7, elastico.getStock());
+            st.setDouble(7, elastico.getStock());
             st.executeUpdate();
             st = this.getCon().prepareStatement("SELECT id FROM materiales ORDER BY id DESC");
             rs = st.executeQuery();
@@ -434,7 +434,7 @@ public class MaterialDAO extends DAO {
             st.setDouble(4, primario.getPrecioCompra());
             st.setDouble(5, primario.getPrecioVenta());
             st.setString(6, primario.getUnidadMedida());
-            st.setInt(7, primario.getStock());
+            st.setDouble(7, primario.getStock());
             st.executeUpdate();
             st = this.getCon().prepareStatement("SELECT id FROM materiales ORDER BY id DESC");
             rs = st.executeQuery();
@@ -560,7 +560,7 @@ public class MaterialDAO extends DAO {
             st.setDouble(4, tela.getPrecioCompra());
             st.setDouble(5, tela.getPrecioVenta());
             st.setString(6, tela.getUnidadMedida());
-            st.setInt(7, tela.getStock());
+            st.setDouble(7, tela.getStock());
             st.executeUpdate();
             st = this.getCon().prepareStatement("SELECT id FROM materiales ORDER BY id DESC");
             rs = st.executeQuery();

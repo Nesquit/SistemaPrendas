@@ -18,7 +18,7 @@ public class Material {
     private double precioCompra;
     private double precioVenta;
     private String unidadMedida;
-    private int stock;
+    private double stock;
     private int estatus;
     private String proveedor;
 
@@ -62,11 +62,11 @@ public class Material {
         this.unidadMedida = unidadMedida;
     }
 
-    public int getStock() {
+    public double getStock() {
         return stock;
     }
 
-    public void setStock(int stock) {
+    public void setStock(double stock) {
         this.stock = stock;
     }
 

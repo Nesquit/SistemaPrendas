@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
@@ -11,14 +12,196 @@
 
             <ui:define name="content">
                 <div align="center">
-                    <h:form id="prendas">
-                        <p:growl id="growl" showDetail="true" sticky="true" />
-                        <p:panel header="Prendas">
-                            <p:panelGrid columns="2" class="center_content">
-                                
-                            </p:panelGrid>
-                        </p:panel>
-                    </h:form>
+                    <p:panel header="Prendas">
+                        <h:form id="prendas">
+                            <p:growl id="growl" showDetail="true" sticky="true" />
+                            <p:tabView>
+                                <p:tab title="Playera">
+                                    <h:panelGrid columns="2" cellpadding="10">
+                                        <p:panelGrid columns="4">
+                                            <p:graphicImage id="playera" url="playera.jpg" width="250" height="250" />
+                                            <p:selectOneMenu id="tamanioPlayera" value="#{pedidoBean.prendaPlayera.idPrenda}">
+                                                <f:selectItem itemLabel="Chico" itemValue="1" />
+                                                <f:selectItem itemLabel="Mediano" itemValue="2" />
+                                                <f:selectItem itemLabel="Grande" itemValue="3" />
+                                                <f:ajax event="change" listener="#{pedidoBean.actualizarCantidadPlayera(event)}" render="telaPlayera elasticoPlayera" execute="@this" />
+                                            </p:selectOneMenu>
+                                            <p:panelGrid columns="3">
+                                                <p:outputLabel style="color: blue" value="Material" />
+                                                <p:outputLabel style="color: blue" value="Cantidad requerida" />
+                                                <p:outputLabel style="color: blue" value="Selección material" />
+
+                                                <p:outputLabel value="Tela" />
+                                                <p:outputLabel id="telaPlayera" value="#{pedidoBean.telas}" />
+                                                <p:selectOneMenu id="idMaterialTelaPlayera" value="#{pedidoBean.telaPlayera.idMaterial}">
+                                                    <f:selectItems value="#{pedidoBean.listaTelas}" var="tlPlayera" itemLabel="#{tlPlayera.nombre}" itemValue="#{tlPlayera.idMaterial}" />
+                                                </p:selectOneMenu>
+                                                
+                                                <p:outputLabel value="Elástico" />
+                                                <p:outputLabel id="elasticoPlayera" value="#{pedidoBean.elasticos}" />
+                                                <p:selectOneMenu id="idMaterialElasticoPlayera" value="#{pedidoBean.elasticoPlayera.idMaterial}">
+                                                    <f:selectItems value="#{pedidoBean.listaElasticos}" var="elaPlayera" itemLabel="#{elaPlayera.nombre}" itemValue="#{elaPlayera.idMaterial}" />
+                                                </p:selectOneMenu>
+                                            </p:panelGrid> 
+                                        </p:panelGrid>
+                                        <p:commandButton style="background-color: blue; color: white" value="Añadir al carrito" update=":prendas:carrito,:prendas:growl,:prendas:totalPedido" actionListener="#{pedidoBean.añadirPlayeraCarrito()}" />
+                                    </h:panelGrid>
+                                </p:tab>
+                                <p:tab title="Pantalón">
+                                    <h:panelGrid columns="2" cellpadding="10">
+                                        <p:panelGrid columns="4">
+                                            <p:graphicImage id="pantalon" url="pantalon.jpg" width="250" height="250" />
+                                            <p:selectOneMenu id="tamanioPantalon" value="#{pedidoBean.prendaPantalon.idPrenda}">
+                                                <f:selectItem itemLabel="Chico" itemValue="4" />
+                                                <f:selectItem itemLabel="Mediano" itemValue="5" />
+                                                <f:selectItem itemLabel="Grande" itemValue="6" />
+                                                <f:ajax event="change" listener="#{pedidoBean.actualizarCantidadPantalon(event)}" render="telaPantalon botonesPantalon cierrePantalon" execute="@this" />
+                                            </p:selectOneMenu>
+                                            <p:panelGrid columns="3">
+                                                <p:outputLabel style="color: blue" value="Material" />
+                                                <p:outputLabel style="color: blue" value="Cantidad requerida" />
+                                                <p:outputLabel style="color: blue" value="Selección material" />
+
+                                                <p:outputLabel value="Tela" />
+                                                <p:outputLabel id="telaPantalon" value="#{pedidoBean.telas}" />
+                                                <p:selectOneMenu id="idMaterialTelaPantalon" value="#{pedidoBean.telaPantalon.idMaterial}">
+                                                    <f:selectItems value="#{pedidoBean.listaTelas}" var="tlPantalon" itemLabel="#{tlPantalon.nombre}" itemValue="#{tlPantalon.idMaterial}" />
+                                                </p:selectOneMenu>
+                                                
+                                                <p:outputLabel value="Botones" />
+                                                <p:outputLabel id="botonesPantalon" value="#{pedidoBean.botones}" />
+                                                <p:selectOneMenu id="idMaterialBotonesPantalon" value="#{pedidoBean.botonPantalon.idMaterial}">
+                                                    <f:selectItems value="#{pedidoBean.listaBotones}" var="botPantalon" itemLabel="#{botPantalon.nombre}" itemValue="#{botPantalon.idMaterial}" />
+                                                </p:selectOneMenu>
+                                                
+                                                <p:outputLabel value="Cierre" />
+                                                <p:outputLabel id="cierrePantalon" value="#{pedidoBean.cierres}" />
+                                                <p:selectOneMenu id="idMaterialCierrePantalon" value="#{pedidoBean.cierrePantalon.idMaterial}">
+                                                    <f:selectItems value="#{pedidoBean.listaCierres}" var="ciePantalon" itemLabel="#{ciePantalon.nombre}" itemValue="#{ciePantalon.idMaterial}" />
+                                                </p:selectOneMenu>
+                                            </p:panelGrid>
+                                        </p:panelGrid>
+                                        <p:commandButton style="background-color: blue; color: white" value="Añadir al carrito" update=":prendas:carrito,:prendas:growl,:prendas:totalPedido" actionListener="#{pedidoBean.añadirPantalonCarrito()}" />
+                                    </h:panelGrid>
+                                </p:tab>
+                                <p:tab title="Camisa">
+                                    <h:panelGrid columns="2" cellpadding="10">
+                                        <p:panelGrid columns="4">
+                                            <p:graphicImage id="camisa" url="camisa.jpg" width="250" height="250" />
+                                            <p:selectOneMenu id="tamanioCamisa" value="#{pedidoBean.prendaCamisa.idPrenda}">
+                                                <f:selectItem itemLabel="Chico" itemValue="7" />
+                                                <f:selectItem itemLabel="Mediano" itemValue="8" />
+                                                <f:selectItem itemLabel="Grande" itemValue="9" />
+                                                <f:ajax event="change" listener="#{pedidoBean.actualizarCantidadCamisa(event)}" render="telaCamisa botonesCamisa" execute="@this" />
+                                            </p:selectOneMenu>
+                                            <p:panelGrid columns="3">
+                                                <p:outputLabel style="color: blue" value="Material" />
+                                                <p:outputLabel style="color: blue" value="Cantidad requerida" />
+                                                <p:outputLabel style="color: blue" value="Selección material" />
+
+                                                <p:outputLabel value="Tela" />
+                                                <p:outputLabel id="telaCamisa" value="#{pedidoBean.telas}" />
+                                                <p:selectOneMenu id="idMaterialTelaCamisa" value="#{pedidoBean.telaCamisa.idMaterial}">
+                                                    <f:selectItems value="#{pedidoBean.listaTelas}" var="tlCamisa" itemLabel="#{tlCamisa.nombre}" itemValue="#{tlCamisa.idMaterial}" />
+                                                </p:selectOneMenu>
+                                                
+                                                <p:outputLabel value="Botones" />
+                                                <p:outputLabel id="botonesCamisa" value="#{pedidoBean.botones}" />
+                                                <p:selectOneMenu id="idMaterialBotonesCamisa" value="#{pedidoBean.botonCamisa.idMaterial}">
+                                                    <f:selectItems value="#{pedidoBean.listaBotones}" var="botCamisa" itemLabel="#{botCamisa.nombre}" itemValue="#{botCamisa.idMaterial}" />
+                                                </p:selectOneMenu>
+                                            </p:panelGrid>
+                                            <p:commandButton style="background-color: blue; color: white" value="Añadir al carrito" update=":prendas:carrito,:prendas:growl,:prendas:totalPedido" actionListener="#{pedidoBean.añadirCamisaCarrito()}" />
+                                        </p:panelGrid>
+                                    </h:panelGrid>
+                                </p:tab>
+                                <p:tab title="Falda">
+                                    <h:panelGrid columns="2" cellpadding="10">
+                                        <p:panelGrid columns="4">
+                                            <p:graphicImage id="falda" url="falda.jpg" width="250" height="250" />
+                                            <p:selectOneMenu id="tamanioFalda" value="#{pedidoBean.prendaFalda.idPrenda}">
+                                                <f:selectItem itemLabel="Chico" itemValue="10" />
+                                                <f:selectItem itemLabel="Mediano" itemValue="11" />
+                                                <f:selectItem itemLabel="Grande" itemValue="12" />
+                                                <f:ajax event="change" listener="#{pedidoBean.actualizarCantidadFalda(event)}" render="telaFalda elasticoFalda" execute="@this" />
+                                            </p:selectOneMenu>
+                                            <p:panelGrid columns="3">
+                                                <p:outputLabel style="color: blue" value="Material" />
+                                                <p:outputLabel style="color: blue" value="Cantidad requerida" />
+                                                <p:outputLabel style="color: blue" value="Selección material" />
+
+                                                <p:outputLabel value="Tela" />
+                                                <p:outputLabel id="telaFalda" value="#{pedidoBean.telas}" />
+                                                <p:selectOneMenu id="idMaterialTelaFalda" value="#{pedidoBean.telaFalda.idMaterial}">
+                                                    <f:selectItems value="#{pedidoBean.listaTelas}" var="tlFalda" itemLabel="#{tlFalda.nombre}" itemValue="#{tlFalda.idMaterial}" />
+                                                </p:selectOneMenu>
+                                                
+                                                <p:outputLabel value="Cierre" />
+                                                <p:outputLabel id="cierreFlada" value="#{pedidoBean.cierres}" />
+                                                <p:selectOneMenu id="idMaterialCierreFalda" value="#{pedidoBean.cierreFalda.idMaterial}">
+                                                    <f:selectItems value="#{pedidoBean.listaCierres}" var="cieFalda" itemLabel="#{cieFalda.nombre}" itemValue="#{cieFalda.idMaterial}" />
+                                                </p:selectOneMenu>
+                                            </p:panelGrid>
+                                            <p:commandButton style="background-color: blue; color: white" value="Añadir al carrito" update=":prendas:carrito,:prendas:growl,:prendas:totalPedido" actionListener="#{pedidoBean.añadirFaldaCarrito()}" />
+                                        </p:panelGrid>
+                                    </h:panelGrid>
+                                </p:tab>
+                                <p:tab title="Blusa">
+                                    <h:panelGrid columns="2" cellpadding="10">
+                                        <p:panelGrid columns="4">
+                                            <p:graphicImage id="blusa" url="blusa.jpg" width="250" height="250" />
+                                            <p:selectOneMenu id="tamanioBlusa" value="#{pedidoBean.prendaBlusa.idPrenda}">
+                                                <f:selectItem itemLabel="Chico" itemValue="13" />
+                                                <f:selectItem itemLabel="Mediano" itemValue="14" />
+                                                <f:selectItem itemLabel="Grande" itemValue="15" />
+                                                <f:ajax event="change" listener="#{pedidoBean.actualizarCantidadBlusa(event)}" render="telaBlusa elasticoBlusa" execute="@this" />
+                                            </p:selectOneMenu>
+                                            <p:panelGrid columns="3">
+                                                <p:outputLabel style="color: blue" value="Material" />
+                                                <p:outputLabel style="color: blue" value="Cantidad requerida" />
+                                                <p:outputLabel style="color: blue" value="Selección material" />
+
+                                                <p:outputLabel value="Tela" />
+                                                <p:outputLabel id="telaBlusa" value="#{pedidoBean.telas}" />
+                                                <p:selectOneMenu id="idMaterialTelaBlusa" value="#{pedidoBean.telaBlusa.idMaterial}">
+                                                    <f:selectItems value="#{pedidoBean.listaTelas}" var="tlBlusa" itemLabel="#{tlBlusa.nombre}" itemValue="#{tlBlusa.idMaterial}" />
+                                                </p:selectOneMenu>
+                                                
+                                                <p:outputLabel value="Elástico" />
+                                                <p:outputLabel id="elasticoBlusa" value="#{pedidoBean.elasticos}" />
+                                                <p:selectOneMenu id="idMaterialElasticoBlusa" value="#{pedidoBean.elasticoBlusa.idMaterial}">
+                                                    <f:selectItems value="#{pedidoBean.listaElasticos}" var="elaBlusa" itemLabel="#{elaBlusa.nombre}" itemValue="#{elaBlusa.idMaterial}" />
+                                                </p:selectOneMenu>
+                                            </p:panelGrid>
+                                            <p:commandButton style="background-color: blue; color: white" value="Añadir al carrito" update=":prendas:carrito,:prendas:growl,:prendas:totalPedido" actionListener="#{pedidoBean.añadirBlusaCarrito()}" />
+                                        </p:panelGrid>
+                                    </h:panelGrid>
+                                </p:tab>
+                            </p:tabView>
+                            <br/>
+                            <p:dataTable id="carrito" value="#{pedidoBean.listaCarritoVenta}" var="venta" >
+                                <p:column headerText="Prenda" >
+                                    <p:outputLabel value="#{venta.tipoPrenda}" />                    
+                                </p:column> 
+                                <p:column headerText="Material" >
+                                    <p:outputLabel value="#{venta.material}" />                    
+                                </p:column> 
+                                <p:column headerText="Cantidad Material" >
+                                    <p:outputLabel value="#{venta.cantidadMaterial}" />                    
+                                </p:column> 
+                                <p:column headerText="Precio" >
+                                    <p:outputLabel value="#{venta.precioVentaMaterial}" />                    
+                                </p:column> 
+                                <p:column headerText="Subtotal" >
+                                    <p:outputLabel value="#{venta.subtotalMaterial}" />                    
+                                </p:column> 
+                            </p:dataTable>
+                            <br/>
+                            <p:outputLabel style="color: blue; font-size: 20px" id="totalPedido" value="Total pedido: $#{pedidoBean.totalPedido}" />
+                            <br/><br/>
+                            <p:commandButton style="background-color: blue; color: white" value="Pedir" action="#{pedidoBean.registrarPedido(sessionScope.usuario)}" update="carrito,growl,totalPedido" />
+                        </h:form>
+                    </p:panel>
                 </div>
             </ui:define>
 

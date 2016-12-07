@@ -1,7 +1,9 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
 
     <body>
 
@@ -9,7 +11,57 @@
 
             <ui:define name="content">
                 <div align="center">
-                    Pedidos
+                    #{clienteBean.consultarPedidos(sessionScope.usuario)}
+                    <p:panel header="Mis pedidos">
+                        <h:form id="mispedidos">
+                            <p:growl id="growl" showDetail="true" sticky="true" />
+                            <p:dataTable id="pedidos" value="#{clienteBean.listaPedidos}" var="pedido">
+                                <p:column headerText="Pedido" >
+                                    <p:outputLabel value="#{pedido.idPedido}" />                    
+                                </p:column> 
+                                <p:column headerText="Total pedido" >
+                                    <p:outputLabel value="#{pedido.totalPedido}" />                    
+                                </p:column> 
+                                <p:column headerText="Fecha pedido" >
+                                    <p:outputLabel value="#{pedido.fechaPedido}" />                    
+                                </p:column>
+                                <p:column headerText="Fecha entrega" >
+                                    <p:outputLabel value="#{pedido.fechaEntrega}" />                    
+                                </p:column>
+                                <p:column headerText="Estatus" >
+                                    <p:outputLabel value="En proceso" />                    
+                                </p:column>
+                                <p:column headerText="Detalle pedido" >
+                                    <p:commandLink value="Ver detalle" action="#{clienteBean.verDetallePedido(pedido)}" 
+                                                   oncomplete="PF('dlgDatos').show()" update=":idDlg" />                    
+                                </p:column>
+                            </p:dataTable>
+                        </h:form>
+                    </p:panel>
+                    <p:dialog header="Detalle del pedido" widgetVar="dlgDatos" id="idDlg">
+                        <h:form>
+                            <p:dataTable id="detallepedido" value="#{clienteBean.listaDetallePedido}" var="detallePedido">
+                                <p:column headerText="Prenda" >
+                                    <p:outputLabel value="#{detallePedido.prenda}" />                    
+                                </p:column>
+                                <p:column headerText="Material" >
+                                    <p:outputLabel value="#{detallePedido.material}" />                    
+                                </p:column>
+                                <p:column headerText="Nombre material" >
+                                    <p:outputLabel value="#{detallePedido.nombreMaterial}" />                    
+                                </p:column>
+                                <p:column headerText="Precio venta" >
+                                    <p:outputLabel value="#{detallePedido.precioVentaMaterial}" />                    
+                                </p:column>
+                                <p:column headerText="Cantidad requerida" >
+                                    <p:outputLabel value="#{detallePedido.cantidadMaterial}" />                    
+                                </p:column>
+                                <p:column headerText="Subtotal del material" >
+                                    <p:outputLabel value="#{detallePedido.subtotalMaterial}" />                    
+                                </p:column>
+                            </p:dataTable>
+                        </h:form>
+                    </p:dialog>
                 </div>
             </ui:define>
 

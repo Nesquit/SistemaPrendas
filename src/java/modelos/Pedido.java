@@ -12,10 +12,9 @@ package modelos;
 public class Pedido {
     
     private int idPedido;
+    private int idCliente;
     private double totalPedido;
-    private int cantidadPrendas;
     private String fechaPedido;
-    private String fechaSalida;
     private String fechaEntrega;
     private int estatus;
 
@@ -27,28 +26,12 @@ public class Pedido {
         this.totalPedido = totalPedido;
     }
 
-    public int getCantidadPrendas() {
-        return cantidadPrendas;
-    }
-
-    public void setCantidadPrendas(int cantidadPrendas) {
-        this.cantidadPrendas = cantidadPrendas;
-    }
-
     public String getFechaPedido() {
         return fechaPedido;
     }
 
     public void setFechaPedido(String fechaPedido) {
         this.fechaPedido = fechaPedido;
-    }
-
-    public String getFechaSalida() {
-        return fechaSalida;
-    }
-
-    public void setFechaSalida(String fechaSalida) {
-        this.fechaSalida = fechaSalida;
     }
 
     public String getFechaEntrega() {
@@ -73,6 +56,14 @@ public class Pedido {
 
     public void setEstatus(int estatus) {
         this.estatus = estatus;
+    }
+
+    public int getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
     }
     
 }
