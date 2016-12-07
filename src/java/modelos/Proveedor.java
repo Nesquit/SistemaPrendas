@@ -19,7 +19,6 @@ public class Proveedor {
     private String telefono;
     private String correo;
     private int estatus;
-    private String estatusImg;
 
     public int getIdProveedor() {
         return idProveedor;
@@ -84,14 +83,5 @@ public class Proveedor {
     public void setEstatus(int estatus) {
         this.estatus = estatus;
     }
-
-    public String getEstatusImg() {
-        return estatusImg;
-    }
-
-    public void setEstatusImg(String estatusImg) {
-        this.estatusImg = estatusImg;
-    }
-    
     
 }

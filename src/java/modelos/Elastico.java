@@ -9,10 +9,9 @@ package modelos;
  *
  * @author nesquit
  */
-public class Elastico {
+public class Elastico extends Material {
     
     private int idElastico;
-    private int idMaterial;
     private String color;
     private int anchura;
 
@@ -22,14 +21,6 @@ public class Elastico {
 
     public void setIdElastico(int idElastico) {
         this.idElastico = idElastico;
-    }
-
-    public int getIdMaterial() {
-        return idMaterial;
-    }
-
-    public void setIdMaterial(int idMaterial) {
-        this.idMaterial = idMaterial;
     }
 
     public String getColor() {

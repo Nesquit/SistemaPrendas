@@ -1,0 +1,190 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./indexAdmin.xhtml">
+
+            <ui:define name="content">
+                #{materialBean.listarElasticos()}
+                #{proveedorBean.listar()}
+                <div align="center">
+                    <p:panel header="Administración de materiales elásticos">
+                        <h:form id="elasticos">
+                            <p:growl id="growl" showDetail="true" sticky="true" />
+                            <p:panelGrid columns="2" class="center_content">
+                                <p:outputLabel for="proveedor" value="Proveedor" />
+                                <p:selectOneMenu id="proveedor" value="#{materialBean.elastico.idProveedor}">
+                                    <f:selectItems value="#{proveedorBean.listaProveedores}" var="proveedor" itemLabel="#{proveedor.nombreEmpresa}" itemValue="#{proveedor.idProveedor}"/>
+                                </p:selectOneMenu>
+                                
+                                <p:outputLabel for="nombre" value="Nombre" />
+                                <p:inputText id="nombre" value="#{materialBean.elastico.nombre}" required="true" />
+                                
+                                <p:outputLabel for="descripcion" value="Descripción" />
+                                <p:inputText id="descripcion" value="#{materialBean.elastico.descripcion}" />
+                                
+                                <p:outputLabel for="precioCompra" value="Precio compra" />
+                                <p:inputText id="precioCompra" value="#{materialBean.elastico.precioCompra}" required="true" />
+                                
+                                <p:outputLabel for="precioVenta" value="Precio venta" />
+                                <p:inputText id="precioVenta" value="#{materialBean.elastico.precioVenta}" required="true" />
+                                
+                                <p:outputLabel for="unidadMedida" value="Unidad de medida" />
+                                <p:selectOneMenu id="unidadMedida" value="#{materialBean.elastico.unidadMedida}">
+                                    <f:selectItem itemLabel="Pieza" itemValue="Pieza" />
+                                    <f:selectItem itemLabel="Metros" itemValue="Metros" />
+                                    <f:selectItem itemLabel="Metros cuadrados" itemValue="Metros cuadrados" />
+                                </p:selectOneMenu>
+                                
+                                <p:outputLabel for="stock" value="Stock" />
+                                <p:inputText id="stock" value="#{materialBean.elastico.stock}" />
+                                
+                                <p:outputLabel for="color" value="Color" />
+                                <p:selectOneMenu id="color" value="#{materialBean.elastico.color}">
+                                    <f:selectItem itemLabel="Rojo" itemValue="Rojo" />
+                                    <f:selectItem itemLabel="Azul" itemValue="Azul" />
+                                    <f:selectItem itemLabel="Amarillo" itemValue="Amarillo" />
+                                    <f:selectItem itemLabel="Verde" itemValue="Verde" />
+                                    <f:selectItem itemLabel="Café" itemValue="Café" />
+                                    <f:selectItem itemLabel="Naranja" itemValue="Naranja" />
+                                    <f:selectItem itemLabel="Negro" itemValue="Negro" />
+                                    <f:selectItem itemLabel="Blanco" itemValue="Blanco" />
+                                    <f:selectItem itemLabel="Purpura" itemValue="Púrpura" />
+                                    <f:selectItem itemLabel="Rosa" itemValue="Rosa" />
+                                    <f:selectItem itemLabel="Gris" itemValue="Gris" />
+                                </p:selectOneMenu>
+                                
+                                <p:outputLabel for="anchura" value="Anchura"/>
+                                <p:inputText id="anchura" value="#{materialBean.elastico.anchura}" required="true" />
+                                
+                                <f:facet name="footer">
+                                    <p:commandButton style="background-color: blue; color: white" value="Registrar" action="#{materialBean.registrarElastico()}" update=":elasticosU:datos,growl" />
+                                </f:facet> 
+                            </p:panelGrid>
+                            <br/>
+                        </h:form>
+                        <h:form id="elasticosU">
+                            <p:dataTable id="datos" value="#{materialBean.listaElasticos}" var="elastico" >
+                                <p:column headerText="Elástico" >
+                                    <p:outputLabel value="#{elastico.idElastico}" />                    
+                                </p:column> 
+                                <p:column headerText="Material" >
+                                    <p:outputLabel value="#{elastico.idMaterial}" />                    
+                                </p:column> 
+                                <p:column headerText="Proveedor" >
+                                    <p:outputLabel value="#{elastico.proveedor}" />                    
+                                </p:column> 
+                                <p:column headerText="Nombre" >
+                                    <p:outputLabel value="#{elastico.nombre}" />                    
+                                </p:column> 
+                                <p:column headerText="Descripción" >
+                                    <p:outputLabel value="#{elastico.descripcion}" />                    
+                                </p:column> 
+                                <p:column headerText="Precio Compra" >
+                                    <p:outputLabel value="#{elastico.precioCompra}" />                    
+                                </p:column> 
+                                <p:column headerText="Precio Venta" >
+                                    <p:outputLabel value="#{elastico.precioVenta}" />                    
+                                </p:column> 
+                                <p:column headerText="Unidad Medida" >
+                                    <p:outputLabel value="#{elastico.unidadMedida}" />                    
+                                </p:column> 
+                                <p:column headerText="Stock" >
+                                    <p:outputLabel value="#{elastico.stock}" />                    
+                                </p:column> 
+                                <p:column headerText="Color" >
+                                    <p:outputLabel value="#{elastico.color}" />                    
+                                </p:column> 
+                                <p:column headerText="Anchura" >
+                                    <p:outputLabel value="#{elastico.anchura}" />                    
+                                </p:column> 
+                                <p:column headerText="Estatus">
+                                    <p:graphicImage id="img" url="#{elastico.estatus}.png" width="20" height="20" />                    
+                                </p:column> 
+                                <p:column headerText="Modificar" >
+                                    <p:commandLink value="Modificar" action="#{materialBean.leerIdElastico(elastico)}" 
+                                                   oncomplete="PF('dlgDatos').show()" update=":idDlg" />                    
+                                </p:column>
+                            </p:dataTable>
+                        </h:form>
+                    </p:panel>
+                    <p:dialog header="Datos" widgetVar="dlgDatos" id="idDlg">
+                        <h:form>
+                            <p:panel header="Actualizar material elástico">
+                                <p:panelGrid id="form" columns="2">
+                                    <p:outputLabel for="idElastico" value="Elástico" />
+                                    <p:outputLabel id="idElastico" value="#{materialBean.elastico.idElastico}" />
+                                    
+                                    <p:outputLabel for="idMaterial" value="Material" />
+                                    <p:outputLabel id="idMaterial" value="#{materialBean.elastico.idMaterial}" />
+                                    
+                                    <p:outputLabel for="proveedor" value="Proveedor" />
+                                    <p:selectOneMenu id="proveedor" value="#{materialBean.elastico.idProveedor}">
+                                        <f:selectItems value="#{proveedorBean.listaProveedores}" var="proveedor" itemLabel="#{proveedor.nombreEmpresa}" itemValue="#{proveedor.idProveedor}"/>
+                                    </p:selectOneMenu>
+
+                                    <p:outputLabel for="nombre" value="Nombre" />
+                                    <p:inputText id="nombre" value="#{materialBean.elastico.nombre}" />
+
+                                    <p:outputLabel for="descripcion" value="Descripción" />
+                                    <p:inputText id="descripcion" value="#{materialBean.elastico.descripcion}" />
+
+                                    <p:outputLabel for="precioCompra" value="Precio compra" />
+                                    <p:inputText id="precioCompra" value="#{materialBean.elastico.precioCompra}" />
+
+                                    <p:outputLabel for="precioVenta" value="Precio venta" />
+                                    <p:inputText id="precioVenta" value="#{materialBean.elastico.precioVenta}" />
+
+                                    <p:outputLabel for="unidadMedida" value="Unidad de medida" />
+                                    <p:selectOneMenu id="unidadMedida" value="#{materialBean.elastico.unidadMedida}">
+                                        <f:selectItem itemLabel="Pieza" itemValue="Pieza" />
+                                        <f:selectItem itemLabel="Metros" itemValue="Metros" />
+                                        <f:selectItem itemLabel="Metros cuadrados" itemValue="Metros cuadrados" />
+                                    </p:selectOneMenu>
+
+                                    <p:outputLabel for="stock" value="Stock" />
+                                    <p:outputLabel id="stock" value="#{materialBean.elastico.stock}" />
+
+                                    <p:outputLabel for="color" value="Color" />
+                                    <p:selectOneMenu id="color" value="#{materialBean.elastico.color}">
+                                        <f:selectItem itemLabel="Rojo" itemValue="Rojo" />
+                                        <f:selectItem itemLabel="Azul" itemValue="Azul" />
+                                        <f:selectItem itemLabel="Amarillo" itemValue="Amarillo" />
+                                        <f:selectItem itemLabel="Verde" itemValue="Verde" />
+                                        <f:selectItem itemLabel="Café" itemValue="Café" />
+                                        <f:selectItem itemLabel="Naranja" itemValue="Naranja" />
+                                        <f:selectItem itemLabel="Negro" itemValue="Negro" />
+                                        <f:selectItem itemLabel="Blanco" itemValue="Blanco" />
+                                        <f:selectItem itemLabel="Purpura" itemValue="Púrpura" />
+                                        <f:selectItem itemLabel="Rosa" itemValue="Rosa" />
+                                        <f:selectItem itemLabel="Gris" itemValue="Gris" />
+                                    </p:selectOneMenu>
+                                    
+                                    <p:outputLabel for="anchura" value="Anchura"/>
+                                    <p:inputText id="anchura" value="#{materialBean.elastico.anchura}" />
+                                    
+                                    <p:outputLabel for="estatus" value="Estatus" />
+                                    <p:selectOneMenu id="estatus" value="#{materialBean.elastico.estatus}">
+                                        <f:selectItem itemLabel="Activo" itemValue="1" />                
+                                        <f:selectItem itemLabel="Inactivo" itemValue="0" />                
+                                    </p:selectOneMenu>
+
+                                    <p:commandButton value="Actualizar" actionListener="#{materialBean.actualizarElastico()}"
+                                                     oncomplete="PF('dlgDatos').hide()" update=":elasticosU:datos" />              
+                                </p:panelGrid>
+                            </p:panel>
+                        </h:form>
+                    </p:dialog>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

@@ -13,11 +13,14 @@ public class Material {
     
     private int idMaterial;
     private int idProveedor;
+    private String nombre;
+    private String descripcion;
     private double precioCompra;
     private double precioVenta;
     private String unidadMedida;
     private int stock;
     private int estatus;
+    private String proveedor;
 
     public int getIdMaterial() {
         return idMaterial;
@@ -73,6 +76,30 @@ public class Material {
 
     public void setEstatus(int estatus) {
         this.estatus = estatus;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getProveedor() {
+        return proveedor;
+    }
+
+    public void setProveedor(String proveedor) {
+        this.proveedor = proveedor;
     }
     
 }

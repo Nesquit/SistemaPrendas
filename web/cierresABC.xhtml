@@ -1,0 +1,217 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./indexAdmin.xhtml">
+
+            <ui:define name="content">
+                #{materialBean.listarCierres()}
+                #{proveedorBean.listar()}
+                <div align="center">                        
+                    <p:panel header="Administración de cierres">
+                        <h:form id="cierres">
+                            <p:growl id="growl" showDetail="true" sticky="true" />
+                            <p:panelGrid columns="2" class="center_content">
+                                <p:outputLabel for="proveedor" value="Proveedor" />
+                                <p:selectOneMenu id="proveedor" value="#{materialBean.cierre.idProveedor}">
+                                    <f:selectItems value="#{proveedorBean.listaProveedores}" var="proveedor" itemLabel="#{proveedor.nombreEmpresa}" itemValue="#{proveedor.idProveedor}"/>
+                                </p:selectOneMenu>
+                                
+                                <p:outputLabel for="nombre" value="Nombre" />
+                                <p:inputText id="nombre" value="#{materialBean.cierre.nombre}" required="true" />
+                                
+                                <p:outputLabel for="descripcion" value="Descripción" />
+                                <p:inputText id="descripcion" value="#{materialBean.cierre.descripcion}" />
+                                
+                                <p:outputLabel for="precioCompra" value="Precio compra" />
+                                <p:inputText id="precioCompra" value="#{materialBean.cierre.precioCompra}" required="true" />
+                                
+                                <p:outputLabel for="precioVenta" value="Precio venta" />
+                                <p:inputText id="precioVenta" value="#{materialBean.cierre.precioVenta}" required="true" />
+                                
+                                <p:outputLabel for="unidadMedida" value="Unidad de medida" />
+                                <p:selectOneMenu id="unidadMedida" value="#{materialBean.cierre.unidadMedida}">
+                                    <f:selectItem itemLabel="Pieza" itemValue="Pieza" />
+                                    <f:selectItem itemLabel="Metros" itemValue="Metros" />
+                                    <f:selectItem itemLabel="Metros cuadrados" itemValue="Metros cuadrados" />
+                                </p:selectOneMenu>
+                                
+                                <p:outputLabel for="stock" value="Stock" />
+                                <p:inputText id="stock" value="#{materialBean.cierre.stock}" />
+                                
+                                <p:outputLabel for="color" value="Color" />
+                                <p:selectOneMenu id="color" value="#{materialBean.cierre.color}">
+                                    <f:selectItem itemLabel="Rojo" itemValue="Rojo" />
+                                    <f:selectItem itemLabel="Azul" itemValue="Azul" />
+                                    <f:selectItem itemLabel="Amarillo" itemValue="Amarillo" />
+                                    <f:selectItem itemLabel="Verde" itemValue="Verde" />
+                                    <f:selectItem itemLabel="Café" itemValue="Café" />
+                                    <f:selectItem itemLabel="Naranja" itemValue="Naranja" />
+                                    <f:selectItem itemLabel="Negro" itemValue="Negro" />
+                                    <f:selectItem itemLabel="Blanco" itemValue="Blanco" />
+                                    <f:selectItem itemLabel="Purpura" itemValue="Púrpura" />
+                                    <f:selectItem itemLabel="Rosa" itemValue="Rosa" />
+                                    <f:selectItem itemLabel="Gris" itemValue="Gris" />
+                                </p:selectOneMenu>
+                                
+                                <p:outputLabel for="material" value="Tipo material"/>
+                                <p:selectOneMenu id="material" value="#{materialBean.cierre.material}">
+                                    <f:selectItem itemLabel="Metal" itemValue="Metal" />
+                                    <f:selectItem itemLabel="Plástico" itemValue="Plástico" />
+                                </p:selectOneMenu>
+                                
+                                <p:outputLabel for="tamaño" value="Tamaño" />
+                                <p:selectOneMenu id="tamaño" value="#{materialBean.cierre.tamanio}">
+                                    <f:selectItem itemLabel="Pequeño" itemValue="Pequeño" />
+                                    <f:selectItem itemLabel="Chico" itemValue="Chico" />
+                                    <f:selectItem itemLabel="Mediano" itemValue="Mediano" />
+                                    <f:selectItem itemLabel="Grande" itemValue="Grance" />
+                                    <f:selectItem itemLabel="Extra grande" itemValue="Entra grande" />
+                                </p:selectOneMenu>
+                                
+                                <f:facet name="footer">
+                                    <p:commandButton style="background-color: blue; color: white" value="Registrar" action="#{materialBean.registrarCierre()}" update=":cierresU:datos,growl" />
+                                </f:facet> 
+                            </p:panelGrid>
+                            <br/>
+                        </h:form>
+                        <h:form id="cierresU">
+                            <p:dataTable id="datos" value="#{materialBean.listaCierres}" var="cierre" >
+                                <p:column headerText="Cierre" >
+                                    <p:outputLabel value="#{cierre.idCierre}" />                    
+                                </p:column> 
+                                <p:column headerText="Material" >
+                                    <p:outputLabel value="#{cierre.idMaterial}" />                    
+                                </p:column> 
+                                <p:column headerText="Proveedor" >
+                                    <p:outputLabel value="#{cierre.proveedor}" />                    
+                                </p:column> 
+                                <p:column headerText="Nombre" >
+                                    <p:outputLabel value="#{cierre.nombre}" />                    
+                                </p:column> 
+                                <p:column headerText="Descripción" >
+                                    <p:outputLabel value="#{cierre.descripcion}" />                    
+                                </p:column> 
+                                <p:column headerText="Precio Compra" >
+                                    <p:outputLabel value="#{cierre.precioCompra}" />                    
+                                </p:column> 
+                                <p:column headerText="Precio Venta" >
+                                    <p:outputLabel value="#{cierre.precioVenta}" />                    
+                                </p:column> 
+                                <p:column headerText="Unidad Medida" >
+                                    <p:outputLabel value="#{cierre.unidadMedida}" />                    
+                                </p:column> 
+                                <p:column headerText="Stock" >
+                                    <p:outputLabel value="#{cierre.stock}" />                    
+                                </p:column> 
+                                <p:column headerText="Color" >
+                                    <p:outputLabel value="#{cierre.color}" />                    
+                                </p:column> 
+                                <p:column headerText="Tipo material" >
+                                    <p:outputLabel value="#{cierre.material}" />                    
+                                </p:column> 
+                                <p:column headerText="Tamaño" >
+                                    <p:outputLabel value="#{cierre.tamanio}" />                    
+                                </p:column> 
+                                <p:column headerText="Estatus">
+                                    <p:graphicImage id="img" url="#{cierre.estatus}.png" width="20" height="20" />                    
+                                </p:column> 
+                                <p:column headerText="Modificar" >
+                                    <p:commandLink value="Modificar" action="#{materialBean.leerIdCierre(cierre)}" 
+                                                   oncomplete="PF('dlgDatos').show()" update=":idDlg" />                    
+                                </p:column>
+                            </p:dataTable>
+                        </h:form>
+                    </p:panel>
+                    <p:dialog header="Datos" widgetVar="dlgDatos" id="idDlg">
+                        <h:form>
+                            <p:panel header="Actualizar botón">
+                                <p:panelGrid id="form" columns="2">
+                                    <p:outputLabel for="idCierre" value="Cierre" />
+                                    <p:outputLabel id="idCierre" value="#{materialBean.cierre.idCierre}" />
+                                    
+                                    <p:outputLabel for="idMaterial" value="Material" />
+                                    <p:outputLabel id="idMaterial" value="#{materialBean.cierre.idMaterial}" />
+                                    
+                                    <p:outputLabel for="proveedor" value="Proveedor" />
+                                    <p:selectOneMenu id="proveedor" value="#{materialBean.cierre.idProveedor}">
+                                        <f:selectItems value="#{proveedorBean.listaProveedores}" var="proveedor" itemLabel="#{proveedor.nombreEmpresa}" itemValue="#{proveedor.idProveedor}"/>
+                                    </p:selectOneMenu>
+
+                                    <p:outputLabel for="nombre" value="Nombre" />
+                                    <p:inputText id="nombre" value="#{materialBean.cierre.nombre}" />
+
+                                    <p:outputLabel for="descripcion" value="Descripción" />
+                                    <p:inputText id="descripcion" value="#{materialBean.cierre.descripcion}" />
+
+                                    <p:outputLabel for="precioCompra" value="Precio compra" />
+                                    <p:inputText id="precioCompra" value="#{materialBean.cierre.precioCompra}" />
+
+                                    <p:outputLabel for="precioVenta" value="Precio venta" />
+                                    <p:inputText id="precioVenta" value="#{materialBean.cierre.precioVenta}" />
+
+                                    <p:outputLabel for="unidadMedida" value="Unidad de medida" />
+                                    <p:selectOneMenu id="unidadMedida" value="#{materialBean.cierre.unidadMedida}">
+                                        <f:selectItem itemLabel="Pieza" itemValue="Pieza" />
+                                        <f:selectItem itemLabel="Metros" itemValue="Metros" />
+                                        <f:selectItem itemLabel="Metros cuadrados" itemValue="Metros cuadrados" />
+                                    </p:selectOneMenu>
+
+                                    <p:outputLabel for="stock" value="Stock" />
+                                    <p:outputLabel id="stock" value="#{materialBean.cierre.stock}" />
+
+                                    <p:outputLabel for="color" value="Color" />
+                                    <p:selectOneMenu id="color" value="#{materialBean.cierre.color}">
+                                        <f:selectItem itemLabel="Rojo" itemValue="Rojo" />
+                                        <f:selectItem itemLabel="Azul" itemValue="Azul" />
+                                        <f:selectItem itemLabel="Amarillo" itemValue="Amarillo" />
+                                        <f:selectItem itemLabel="Verde" itemValue="Verde" />
+                                        <f:selectItem itemLabel="Café" itemValue="Café" />
+                                        <f:selectItem itemLabel="Naranja" itemValue="Naranja" />
+                                        <f:selectItem itemLabel="Negro" itemValue="Negro" />
+                                        <f:selectItem itemLabel="Blanco" itemValue="Blanco" />
+                                        <f:selectItem itemLabel="Purpura" itemValue="Púrpura" />
+                                        <f:selectItem itemLabel="Rosa" itemValue="Rosa" />
+                                        <f:selectItem itemLabel="Gris" itemValue="Gris" />
+                                    </p:selectOneMenu>
+                                    
+                                    <p:outputLabel for="material" value="Tipo material"/>
+                                    <p:selectOneMenu id="material" value="#{materialBean.cierre.material}">
+                                        <f:selectItem itemLabel="Metal" itemValue="Metal" />
+                                        <f:selectItem itemLabel="Plástico" itemValue="Plástico" />
+                                    </p:selectOneMenu>
+
+                                    <p:outputLabel for="tamaño" value="Tamaño" />
+                                    <p:selectOneMenu id="tamaño" value="#{materialBean.cierre.tamanio}">
+                                        <f:selectItem itemLabel="Pequeño" itemValue="Pequeño" />
+                                        <f:selectItem itemLabel="Chico" itemValue="Chico" />
+                                        <f:selectItem itemLabel="Mediano" itemValue="Mediano" />
+                                        <f:selectItem itemLabel="Grande" itemValue="Grance" />
+                                        <f:selectItem itemLabel="Extra grande" itemValue="Entra grande" />
+                                    </p:selectOneMenu>
+                                    
+                                    <p:outputLabel for="estatus" value="Estatus" />
+                                    <p:selectOneMenu id="estatus" value="#{materialBean.cierre.estatus}">
+                                        <f:selectItem itemLabel="Activo" itemValue="1" />                
+                                        <f:selectItem itemLabel="Inactivo" itemValue="0" />                
+                                    </p:selectOneMenu>
+
+                                    <p:commandButton value="Actualizar" actionListener="#{materialBean.actualizarCierre()}"
+                                                     oncomplete="PF('dlgDatos').hide()" update=":cierresU:datos" />              
+                                </p:panelGrid>
+                            </p:panel>
+                        </h:form>
+                    </p:dialog>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

@@ -8,8 +8,6 @@
 }
 
 #bottom {
-    position: absolute;
-    bottom: 0;
     width: 100%;
     background-color: #c2dfef;
     padding: 5px;

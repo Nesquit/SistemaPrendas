@@ -9,12 +9,10 @@ package modelos;
  *
  * @author nesquit
  */
-public class Boton {
+public class Boton extends Material{
     
     private int idBoton;
-    private int idMaterial;
     private String color;
-    private String tipoPrenda;
     private String tamanio;
 
     public int getIdBoton() {
@@ -25,28 +23,12 @@ public class Boton {
         this.idBoton = idBoton;
     }
 
-    public int getIdMaterial() {
-        return idMaterial;
-    }
-
-    public void setIdMaterial(int idMaterial) {
-        this.idMaterial = idMaterial;
-    }
-
     public String getColor() {
         return color;
     }
 
     public void setColor(String color) {
         this.color = color;
-    }
-
-    public String getTipoPrenda() {
-        return tipoPrenda;
-    }
-
-    public void setTipoPrenda(String tipoPrenda) {
-        this.tipoPrenda = tipoPrenda;
     }
 
     public String getTamanio() {

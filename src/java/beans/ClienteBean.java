@@ -54,8 +54,7 @@ public class ClienteBean {
         ClienteDAO daoCliente = new ClienteDAO();
         UsuarioDAO daoUsuario = new UsuarioDAO();
         if(!daoUsuario.verificarUsuario(usuario)) {
-            int idUsuario = daoUsuario.registrarUsuario(usuario);
-            daoCliente.registrarCliente(cliente, idUsuario);
+            daoCliente.registrarCliente(cliente, daoUsuario.registrarUsuario(usuario));
             if(daoUsuario.inciarSesion(usuario)) {
                 variablesSesion();
                 return "indexClient";

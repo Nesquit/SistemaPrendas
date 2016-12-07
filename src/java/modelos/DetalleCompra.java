@@ -14,6 +14,7 @@ public class DetalleCompra {
     private int idDetalleCompra;
     private int idCompra;
     private int idMaterial;
+    private String nombreMaterial;
     private double precioCompraMaterial;
     private double totalPrecioCompraMaterial;
     private int totalUnidadesMaterial;
@@ -64,6 +65,14 @@ public class DetalleCompra {
 
     public void setTotalUnidadesMaterial(int totalUnidadesMaterial) {
         this.totalUnidadesMaterial = totalUnidadesMaterial;
+    }
+
+    public String getNombreMaterial() {
+        return nombreMaterial;
+    }
+
+    public void setNombreMaterial(String nombreMaterial) {
+        this.nombreMaterial = nombreMaterial;
     }
     
 }

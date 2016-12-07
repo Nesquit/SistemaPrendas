@@ -9,10 +9,9 @@ package modelos;
  *
  * @author nesquit
  */
-public class Tela {
+public class Tela extends Material {
     
     private int idTela;
-    private int idMaterial;
     private String color;
     private String textura;
 
@@ -22,14 +21,6 @@ public class Tela {
 
     public void setIdTela(int idTela) {
         this.idTela = idTela;
-    }
-
-    public int getIdMaterial() {
-        return idMaterial;
-    }
-
-    public void setIdMaterial(int idMaterial) {
-        this.idMaterial = idMaterial;
     }
 
     public String getColor() {

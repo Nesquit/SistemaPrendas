@@ -9,10 +9,9 @@ package modelos;
  *
  * @author nesquit
  */
-public class Cierre {
+public class Cierre extends Material {
     
     private int idCierre;
-    private int idMaterial;
     private String color;
     private String material;
     private String tamanio;
@@ -23,14 +22,6 @@ public class Cierre {
 
     public void setIdCierre(int idCierre) {
         this.idCierre = idCierre;
-    }
-
-    public int getIdMaterial() {
-        return idMaterial;
-    }
-
-    public void setIdMaterial(int idMaterial) {
-        this.idMaterial = idMaterial;
     }
 
     public String getColor() {

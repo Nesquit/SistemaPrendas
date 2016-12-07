@@ -74,12 +74,6 @@ public class ProveedorDAO extends DAO{
                 prov.setTelefono(rs.getString("telefono"));
                 prov.setCorreo(rs.getString("correo"));
                 prov.setEstatus(rs.getInt("estatus"));
-                if (rs.getInt("estatus")==1) {
-                    prov.setEstatusImg("./estatus/verde.png");
-                }else if (rs.getInt("estatus")==2 || rs.getInt("estatus")==0 ) {
-                    prov.setEstatusImg("./estatus/rojo.png");                    
-                }
-                
                 lista.add(prov);
             }
         } catch (Exception e) {

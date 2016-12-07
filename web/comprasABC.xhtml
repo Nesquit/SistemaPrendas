@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./indexAdmin.xhtml">
+            
+            <ui:define name="content">
+                <div align="center">
+                    <h:form id="compras">
+                        <p:growl id="growl" showDetail="true" sticky="true" />
+                        <p:panel header="Administración de compras">
+                            <p:panelGrid columns="2">
+                                <p:outputLabel for="categoria" value="Categorías" />
+                                <p:selectOneMenu id="categoria" value="#{compraBean.categoria}">
+                                    <f:selectItems value="#{compraBean.listaCategorias}" />
+                                    <f:ajax event="change" listener="#{compraBean.obtenerMateriales(event)}" render="materiales" execute="@this" />
+                                </p:selectOneMenu>
+                                
+                                <p:outputLabel for="materiales" value="Materiales" />
+                                <p:selectOneMenu id="materiales" value="#{compraBean.idMaterial}">
+                                    <f:selectItems value="#{compraBean.listaMateriales}" var="material" itemLabel="#{material.nombre}" itemValue="#{material.idMaterial}" />
+                                </p:selectOneMenu>
+                                
+                                <p:commandButton style="background-color: blue; color: white" actionListener="#{compraBean.consultarStock()}" update="stockExistente" value="Stock" />
+                                <p:outputLabel id="stockExistente" value="#{compraBean.stockExistente}" />
+                                
+                                <p:outputLabel for="cantidad" value="Cantidad" />
+                                <p:inputText id="cantidad" type="number" value="#{compraBean.cantidad}" required="true">
+                                    <f:validateDoubleRange minimum="1" maximum="100"></f:validateDoubleRange>
+                                </p:inputText>
+                                
+                                <f:facet name="footer">
+                                    <p:commandButton style="background-color: blue; color: white" value="Agregar" actionListener="#{compraBean.agregarCarritoCompras()}" update="carrito,growl,totalCompra"/>
+                                </f:facet>
+                            </p:panelGrid>
+                            <br/>
+                            <p:dataTable id="carrito" value="#{compraBean.listaDetalleCompra}" var="compra">
+                                <p:column headerText="ID" >
+                                    <p:outputLabel value="#{compra.idMaterial}" />                    
+                                </p:column> 
+                                <p:column headerText="Precio de compra" >
+                                    <p:outputLabel value="#{compra.precioCompraMaterial}" />                    
+                                </p:column> 
+                                <p:column headerText="Unidades a comprar" >
+                                    <p:outputLabel value="#{compra.totalUnidadesMaterial}" />                    
+                                </p:column> 
+                                <p:column headerText="Subtotal del material" >
+                                    <p:outputLabel value="#{compra.totalPrecioCompraMaterial}" />                    
+                                </p:column> 
+                            </p:dataTable>
+                            <br/>
+                            <p:outputLabel style="color: blue; font-size: 20px" id="totalCompra" value="Total compra: $#{compraBean.totalCompra}" />
+                            <br/><br/>
+                            <p:commandButton style="background-color: blue; color: white" value="Comprar" action="#{compraBean.registrarCompra()}" update="carrito,growl,totalCompra" />
+                        </p:panel>
+                    </h:form>
+                </div>
+            </ui:define>
+            
+        </ui:composition>
+
+    </body>
+</html>

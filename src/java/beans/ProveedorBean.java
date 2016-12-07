@@ -51,14 +51,10 @@ public class ProveedorBean {
         ProveedorDAO dao;
         try {
             dao=new ProveedorDAO();
-            System.out.println("1");
             dao.registrar(proveedor);
-           
-            System.out.println("2");
+            Mensajes.generarMensaje("Éxito", "El proveedor se ha registrado.");
         } catch (Exception e) {
-            System.out.println("3");
             throw  e;
-            
         }
         
     }
